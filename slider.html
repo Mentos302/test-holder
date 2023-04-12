@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+  <!--<![endif]-->
+
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Furniture Store Isometric Slider1 - Slider Revolution</title>
+    <meta name="description" content="Slider Revolution Example" />
+    <meta
+      name="keywords"
+      content="fullscreen image, grid layout, flexbox grid, transition"
+    />
+    <meta name="author" content="ThemePunch" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- LOAD JQUERY LIBRARY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
+
+    <!-- LOADING FONTS AND ICONS -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:400%7CManrope:800%2C400%2C500%2C700&display=swap"
+      rel="stylesheet"
+      property="stylesheet"
+      media="all"
+      type="text/css"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="fonts/font-awesome/css/font-awesome.css"
+    />
+
+    <!-- REVOLUTION STYLE SHEETS -->
+    <link rel="stylesheet" type="text/css" href="css/rs6.css" />
+    <!-- REVOLUTION LAYERS STYLES -->
+    <!-- REVOLUTION JS FILES -->
+
+    <script>
+      window.RS_MODULES = window.RS_MODULES || {};
+      window.RS_MODULES.modules = window.RS_MODULES.modules || {};
+      window.RS_MODULES.waiting = window.RS_MODULES.waiting || [];
+      window.RS_MODULES.defered = true;
+
+      window.RS_MODULES.waiting = window.RS_MODULES.waiting.concat([
+        "mousetrap",
+      ]);
+      window.RS_MODULES.moduleWaiting = window.RS_MODULES.moduleWaiting || {};
+      window.RS_MODULES.type = "compiled";
+    </script>
+    <script src="js/rbtools.min.js"></script>
+    <script src="js/rs6.min.js"></script>
+
+    <script>
+      function setREVStartSize(e) {
+        //window.requestAnimationFrame(function() {
+        window.RSIW =
+          window.RSIW === undefined ? window.innerWidth : window.RSIW;
+        window.RSIH =
+          window.RSIH === undefined ? window.innerHeight : window.RSIH;
+        try {
+          var pw = document.getElementById(e.c).parentNode.offsetWidth,
+            newh;
+          pw =
+            pw === 0 ||
+            isNaN(pw) ||
+            e.l == "fullwidth" ||
+            e.layout == "fullwidth"
+              ? window.RSIW
+              : pw;
+          e.tabw = e.tabw === undefined ? 0 : parseInt(e.tabw);
+          e.thumbw = e.thumbw === undefined ? 0 : parseInt(e.thumbw);
+          e.tabh = e.tabh === undefined ? 0 : parseInt(e.tabh);
+          e.thumbh = e.thumbh === undefined ? 0 : parseInt(e.thumbh);
+          e.tabhide = e.tabhide === undefined ? 0 : parseInt(e.tabhide);
+          e.thumbhide = e.thumbhide === undefined ? 0 : parseInt(e.thumbhide);
+          e.mh =
+            e.mh === undefined || e.mh == "" || e.mh === "auto"
+              ? 0
+              : parseInt(e.mh, 0);
+          if (e.layout === "fullscreen" || e.l === "fullscreen")
+            newh = Math.max(e.mh, window.RSIH);
+          else {
+            e.gw = Array.isArray(e.gw) ? e.gw : [e.gw];
+            for (var i in e.rl)
+              if (e.gw[i] === undefined || e.gw[i] === 0) e.gw[i] = e.gw[i - 1];
+            e.gh =
+              e.el === undefined ||
+              e.el === "" ||
+              (Array.isArray(e.el) && e.el.length == 0)
+                ? e.gh
+                : e.el;
+            e.gh = Array.isArray(e.gh) ? e.gh : [e.gh];
+            for (var i in e.rl)
+              if (e.gh[i] === undefined || e.gh[i] === 0) e.gh[i] = e.gh[i - 1];
+
+            var nl = new Array(e.rl.length),
+              ix = 0,
+              sl;
+            e.tabw = e.tabhide >= pw ? 0 : e.tabw;
+            e.thumbw = e.thumbhide >= pw ? 0 : e.thumbw;
+            e.tabh = e.tabhide >= pw ? 0 : e.tabh;
+            e.thumbh = e.thumbhide >= pw ? 0 : e.thumbh;
+            for (var i in e.rl) nl[i] = e.rl[i] < window.RSIW ? 0 : e.rl[i];
+            sl = nl[0];
+            for (var i in nl)
+              if (sl > nl[i] && nl[i] > 0) {
+                sl = nl[i];
+                ix = i;
+              }
+            var m =
+              pw > e.gw[ix] + e.tabw + e.thumbw
+                ? 1
+                : (pw - (e.tabw + e.thumbw)) / e.gw[ix];
+            newh = e.gh[ix] * m + (e.tabh + e.thumbh);
+          }
+          var el = document.getElementById(e.c);
+          if (el !== null && el) el.style.height = newh + "px";
+          el = document.getElementById(e.c + "_wrapper");
+          if (el !== null && el) {
+            el.style.height = newh + "px";
+            el.style.display = "block";
+          }
+        } catch (e) {
+          console.log("Failure at Presize of Slider:" + e);
+        }
+        //});
+      }
+    </script>
+  </head>
+
+  <body>
+    <!-- START Furniture Store Isometric Slider1 REVOLUTION SLIDER 6.6.12 -->
+    <p class="rs-p-wp-fix"></p>
+    <rs-module-wrap
+      id="rev_slider_2_1_wrapper"
+      data-alias="furniture-store-isometric-slider1"
+      data-source="gallery"
+      style="visibility: hidden; background: #0c0c0c; padding: 0"
+    >
+      <rs-module
+        id="rev_slider_2_1"
+        class="rs-respect-topbar"
+        style=""
+        data-version="6.6.12"
+      >
+        <rs-slides style="overflow: hidden; position: absolute">
+          <rs-slide
+            style="position: absolute"
+            data-key="rs-2"
+            data-title="Slide"
+            data-in="o:1;x:(100%);"
+            data-out="a:false;"
+          >
+            <img
+              src="assets/transparent.png"
+              alt="Slide"
+              class="rev-slidebg tp-rs-img"
+              data-bg="c:linear-gradient(150deg, rgba(73,94,94,1) 0%, rgba(192,163,138,1) 100%);"
+              data-parallax="off"
+              data-no-retina
+            />
+            <!--						--><rs-zone
+              id="rrzm_2"
+              class="rev_row_zone_middle"
+              style="z-index: 5"
+              ><!--
+
+								--><rs-row
+                id="slider-2-slide-2-layer-5"
+                data-type="row"
+                data-xy="xo:50px;yo:50px;"
+                data-rsp_bd="off"
+                data-margin="r:50,50,50,30;b:180,150,300,200;l:50,50,50,30;"
+                data-frame_0="x:left;o:1;"
+                data-frame_0_reverse="x:true;"
+                data-frame_1="sp:1000;"
+                data-frame_999="x:right;o:1;st:w;sp:800;sA:9000;"
+                data-frame_999_reverse="x:true;"
+                style="z-index: 6"
+                ><!--
+									--><rs-column
+                  id="slider-2-slide-2-layer-6"
+                  data-type="column"
+                  data-xy="xo:50px;yo:50px;"
+                  data-rsp_bd="off"
+                  data-column="w:100%;"
+                  data-frame_0="o:1;"
+                  data-frame_999="o:1;st:w;sA:9000;"
+                  style="z-index: 6; width: 100%"
+                  ><!--
+										--><rs-layer
+                    id="slider-2-slide-2-layer-9"
+                    data-type="text"
+                    data-rsp_ch="on"
+                    data-xy=""
+                    data-pos="r"
+                    data-text="w:normal;s:140,75,56,34;l:150,100,75,46;ls:-5px,-4px,-3px,-1px;fw:800;"
+                    data-dim="w:390px,322px,244px,150px;h:180px,148px,112px,69px;"
+                    data-disp="inline-block"
+                    data-padding="l:0,0,0,3;"
+                    data-frame_0="o:1;"
+                    data-frame_999="o:1;st:w;sp:800;"
+                    style="
+                      z-index: 10;
+                      font-family: 'Manrope';
+                      display: inline-block;
+                    "
+                    >Офіс? </rs-layer
+                  ><!--
+
+										--><rs-layer
+                    id="slider-2-slide-2-layer-11"
+                    data-type="text"
+                    data-rsp_ch="on"
+                    data-xy=""
+                    data-pos="r"
+                    data-text="w:normal;s:40,25,20,15;l:50,41,31,25;fw:800;"
+                    data-margin="b:70,58,44,30;"
+                    data-padding="l:10,8,6,4;"
+                    data-frame_0="o:1;"
+                    data-frame_999="o:1;st:w;sp:800;"
+                    style="
+                      z-index: 9;
+                      font-family: 'Manrope';
+                      text-transform: uppercase;
+                    "
+                    >Облаштуйте вже завтра! </rs-layer
+                  ><!--
+
+										-->
+
+                  --><rs-layer
+                    id="slider-2-slide-2-layer-12"
+                    data-type="text"
+                    data-rsp_ch="on"
+                    data-xy=""
+                    data-pos="r"
+                    data-text="w:normal;s:20,16,16,16;l:30,24,24,24;"
+                    data-dim="w:#1/3#,#1/3#,#2/3#,auto;"
+                    data-margin="b:40,33,40,25;"
+                    data-padding="l:10,8,6,4;"
+                    data-frame_0="o:1;"
+                    data-frame_999="o:1;st:w;sp:800;"
+                    style="z-index: 7; font-family: 'Manrope'"
+                    >Пропонуємо зручну модель облаштування вашого офісного
+                    простору для ефективної роботи. </rs-layer
+                  ><!--
+
+										--><a
+                    id="slider-2-slide-2-layer-13"
+                    class="rs-layer rev-btn"
+                    href="https://t.me/mentos302"
+                    target="_blank"
+                    rel="noopener"
+                    data-type="button"
+                    data-xy=""
+                    data-pos="r"
+                    data-text="w:normal;s:14;l:40;ls:2px;fw:800;"
+                    data-dim="minh:0px,none,none,none;"
+                    data-rsp_o="off"
+                    data-rsp_bd="off"
+                    data-disp="inline-block"
+                    data-margin="l:10,10,10,4;"
+                    data-border="bos:solid;boc:rgba(255,255,255,0.35);bow:0px,0px,1px,0px;"
+                    data-frame_0="o:1;"
+                    data-frame_999="o:1;st:w;sp:800;"
+                    data-frame_hover="bgc:rgba(0,0,0,0);boc:rgba(255,255,255,0.75);bor:0px,0px,0px,0px;bos:solid;bow:0px,0px,1px,0px;e:power1.inOut;"
+                    style="
+                      z-index: 6;
+                      background-color: rgba(0, 0, 0, 0);
+                      font-family: 'Manrope';
+                      text-transform: uppercase;
+                      display: inline-block;
+                    "
+                    >Детальніше </a
+                  ><!--
+									--></rs-column
+                ><!--
+								--></rs-row
+              ><!--
+							--></rs-zone
+            ><!--
+
+							--><rs-group
+              id="slider-2-slide-2-layer-3"
+              class="rs-pxl-1"
+              data-type="group"
+              data-rsp_ch="on"
+              data-xy="x:c;xo:200px,165px,75px,54px;y:b;yo:-240px,-130px,-78px,-60px;"
+              data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+              data-dim="w:780,586,525,336;h:709px,532px,477px,306px;"
+              data-basealign="slide"
+              data-frame_0="y:bottom;"
+              data-frame_1="sp:1000;"
+              data-frame_999="x:right;o:1;st:w;sp:800;sA:9000;"
+              data-frame_999_reverse="x:true;"
+              style="z-index: 7"
+              ><!--
+								--><rs-layer
+                id="slider-2-slide-2-layer-2"
+                data-type="shape"
+                data-rsp_ch="on"
+                data-xy="x:r;y:b;"
+                data-pos="a"
+                data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+                data-dim="w:416,312,280,179;h:400px,300px,268px,172px;"
+                data-frame_0="o:1;skY:-29px;"
+                data-frame_1="skY:-29px;"
+                data-frame_999="o:1;st:w;sp:800;"
+                style="z-index: 8; background-color: #1a3035"
+              >
+              </rs-layer
+              ><!--
+
+								--><rs-layer
+                id="slider-2-slide-2-layer-1"
+                data-type="shape"
+                data-rsp_ch="on"
+                data-xy="y:b;"
+                data-pos="a"
+                data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+                data-dim="w:416,312,280,179;h:400px,300px,268px,172px;"
+                data-frame_0="o:1;skY:29px;"
+                data-frame_1="skY:29px;"
+                data-frame_999="o:1;st:w;sp:800;"
+                style="z-index: 7; background-color: #bd8a72"
+              >
+              </rs-layer
+              ><!--
+
+								--><rs-layer
+                id="slider-2-slide-2-layer-0"
+                data-type="shape"
+                data-rsp_ch="on"
+                data-xy="x:c;"
+                data-pos="a"
+                data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+                data-dim="w:416,312,280,179;h:416,312,280,179;"
+                data-frame_0="o:1;rZ:45deg;skX:-16px;skY:-16px;"
+                data-frame_1="rZ:45deg;skX:-16px;skY:-16px;"
+                data-frame_999="o:1;st:w;sp:800;"
+                style="z-index: 6; background-color: #fee7b2"
+              >
+              </rs-layer
+              ><!--
+							--></rs-group
+            ><!--
+
+							--><rs-layer
+              id="slider-2-slide-2-layer-4"
+              class="rs-pxl-1"
+              data-type="image"
+              data-rsp_ch="on"
+              data-xy="x:c;xo:210px,170px,79px,56px;y:b;yo:47px,85px,118px,65px;"
+              data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+              data-dim="w:722px,541px,477px,299px;h:639px,479px,422px,265px;"
+              data-basealign="slide"
+              data-frame_0="y:top;"
+              data-frame_1="sp:1000;"
+              data-frame_999="x:right;o:1;st:w;sp:800;"
+              data-frame_999_reverse="x:true;"
+              style="z-index: 8"
+              ><img
+                src="assets/livingroom.png"
+                alt=""
+                class="tp-rs-img"
+                width="722"
+                height="639"
+                data-no-retina
+              /> </rs-layer
+            ><!--
+-->
+          </rs-slide>
+        </rs-slides>
+        <rs-static-layers
+          ><!--
+						--><rs-zone id="rrzt_2" class="rev_row_zone_top" style="z-index: 10"
+            ><!--
+
+								--><rs-row
+              id="slider-2-slide-2-layer-23"
+              class="rs-layer-static"
+              data-type="row"
+              data-xy="xo:50px;yo:50px;"
+              data-cbreak="nobreak"
+              data-basealign="slide"
+              data-rsp_bd="off"
+              data-onslides="s:1;"
+              data-margin="t:30,20,20,20;r:50,50,50,30;l:50,50,50,30;"
+              data-frame_0="y:top;"
+              data-frame_1="sp:1000;"
+              data-frame_999="o:0;st:w;sA:9000;"
+              style="z-index: 6"
+              ><!--
+									--><rs-column
+                id="slider-2-slide-2-layer-24"
+                class="rs-layer-static"
+                data-type="column"
+                data-xy="xo:50px;yo:50px;"
+                data-rsp_bd="off"
+                data-onslides="s:1;"
+                data-column="w:50%;a:middle;"
+                data-frame_0="o:1;"
+                data-frame_999="o:0;st:w;sA:9000;"
+                style="z-index: 7; width: 100%"
+                ><!--
+										--><!--
+									--></rs-column
+              ><!--
+
+									--><rs-column
+                id="slider-2-slide-2-layer-25"
+                class="rs-layer-static"
+                data-type="column"
+                data-xy="xo:50px;yo:50px;"
+                data-text="a:right;"
+                data-rsp_bd="off"
+                data-onslides="s:1;"
+                data-column="w:50%;a:middle;"
+                data-frame_0="o:1;"
+                data-frame_999="o:0;st:w;sA:9000;"
+                style="z-index: 6; width: 100%"
+                ><!--
+										
+									--></rs-column
+              ><!--
+								--></rs-row
+            ><!--
+							--></rs-zone
+          ><!--
+						--><rs-zone id="rrzb_2" class="rev_row_zone_bottom" style="z-index: 7"
+            ><!--
+
+								--><rs-row
+              id="slider-2-slide-2-layer-7"
+              class="rs-layer-static"
+              data-type="row"
+              data-xy="xo:50px;yo:50px;"
+              data-rsp_bd="off"
+              data-onslides="s:1;"
+              data-margin="r:50,50,50,30;b:50;l:50,50,50,30;"
+              data-frame_0="y:bottom;"
+              data-frame_1="sp:1000;"
+              data-frame_999="o:0;st:w;sA:9000;"
+              style="z-index: 6"
+              ><!--
+			
+              ><!--
+								--></rs-row
+            ><!--
+							--></rs-zone
+          ><!--
+
+							--><rs-group
+            id="slider-2-slide-2-layer-26"
+            class="rs-noevents rs-layer-static"
+            data-type="group"
+            data-rsp_ch="on"
+            data-xy="x:c;y:m;"
+            data-text="w:normal;s:20,16,12,7;l:0,20,15,9;a:center;"
+            data-dim="w:100%;h:100%;"
+            data-basealign="slide"
+            data-onslides="s:1;"
+            data-column="a:middle;"
+            data-clip="u:true;o:t;"
+            data-frame_0="o:1;cp:0%;"
+            data-frame_1="sp:800;bB:10px;st:a;"
+            data-frame_999="o:1;st:a;sp:500;cp:0%;sA:9000;"
+            style="z-index: 9; background-color: rgba(0, 0, 0, 0.9)"
+            ><!--
+								--><rs-layer
+              id="slider-2-slide-2-layer-29"
+              class="rs-layer-static"
+              data-type="text"
+              data-color="rgba(255, 255, 255, 0.65)"
+              data-rsp_ch="on"
+              data-xy="x:c;y:m;yo:-200px,-165px,-125px,-97px;"
+              data-pos="a"
+              data-text="w:normal;s:80,66,50,30;l:110,90,68,41;ls:-2px,-1px,0px,0px;fw:800;a:center;"
+              data-actions="o:click;a:jumptoslide;slide:rs-2;||o:click;a:simulateclick;layer:slider-2-slide-2-layer-22;||o:mouseenter;a:gotoframe;layer:slider-2-slide-2-layer-27;f:frame_1;ch:true;||o:mouseleave;a:gotoframe;layer:slider-2-slide-2-layer-27;f:frame_2;ch:true;"
+              data-onslides="s:1;"
+              data-frame_0="y:-100%;"
+              data-frame_0_mask="u:t;"
+              data-frame_1="sp:1000;"
+              data-frame_1_mask="u:t;"
+              data-frame_999="y:-100%;o:0;st:w;sp:1200;"
+              data-frame_999_mask="u:t;"
+              data-frame_hover="c:#fff;"
+              style="z-index: 13; font-family: 'Manrope'; cursor: pointer"
+              >Living Room </rs-layer
+            ><!--
+
+								--><rs-layer
+              id="slider-2-slide-2-layer-28"
+              class="rs-layer-static"
+              data-type="text"
+              data-color="rgba(255, 255, 255, 0.65)"
+              data-rsp_ch="on"
+              data-xy="x:c;y:m;yo:-80px,-66px,-50px,-40px;"
+              data-pos="a"
+              data-text="w:normal;s:80,66,50,30;l:110,90,68,41;ls:-2px,-1px,0px,0px;fw:800;a:center;"
+              data-actions="o:click;a:jumptoslide;slide:rs-3;||o:click;a:simulateclick;layer:slider-2-slide-2-layer-22;||o:mouseenter;a:gotoframe;layer:slider-2-slide-2-layer-32;f:frame_1;ch:true;||o:mouseleave;a:gotoframe;layer:slider-2-slide-2-layer-32;f:frame_2;ch:true;"
+              data-onslides="s:1;"
+              data-frame_0="y:-100%;"
+              data-frame_0_mask="u:t;"
+              data-frame_1="sp:1000;"
+              data-frame_1_mask="u:t;"
+              data-frame_999="y:-100%;o:0;st:w;sp:1200;"
+              data-frame_999_mask="u:t;"
+              data-frame_hover="c:#fff;"
+              style="z-index: 12; font-family: 'Manrope'; cursor: pointer"
+              >Kitchen </rs-layer
+            ><!--
+
+								--><rs-layer
+              id="slider-2-slide-2-layer-30"
+              class="rs-layer-static"
+              data-type="text"
+              data-color="rgba(255, 255, 255, 0.65)"
+              data-rsp_ch="on"
+              data-xy="x:c;y:m;yo:40px,33px,25px,15px;"
+              data-pos="a"
+              data-text="w:normal;s:80,66,50,30;l:110,90,68,41;ls:-2px,-1px,0px,0px;fw:800;a:center;"
+              data-actions="o:click;a:jumptoslide;slide:rs-4;||o:click;a:simulateclick;layer:slider-2-slide-2-layer-22;||o:mouseenter;a:gotoframe;layer:slider-2-slide-2-layer-33;f:frame_1;ch:true;||o:mouseleave;a:gotoframe;layer:slider-2-slide-2-layer-33;f:frame_2;ch:true;"
+              data-onslides="s:1;"
+              data-frame_0="y:-100%;"
+              data-frame_0_mask="u:t;"
+              data-frame_1="sp:1000;"
+              data-frame_1_mask="u:t;"
+              data-frame_999="y:-100%;o:0;st:w;sp:1200;"
+              data-frame_999_mask="u:t;"
+              data-frame_hover="c:#fff;"
+              style="z-index: 11; font-family: 'Manrope'; cursor: pointer"
+              >Bedroom </rs-layer
+            ><!--
+
+								--><rs-layer
+              id="slider-2-slide-2-layer-31"
+              class="rs-layer-static"
+              data-type="text"
+              data-color="rgba(255, 255, 255, 0.65)"
+              data-rsp_ch="on"
+              data-xy="x:c;y:m;yo:160px,132px,100px,71px;"
+              data-pos="a"
+              data-text="w:normal;s:80,66,50,30;l:110,90,68,41;ls:-2px,-1px,0px,0px;fw:800;a:center;"
+              data-actions="o:click;a:jumptoslide;slide:rs-5;||o:click;a:simulateclick;layer:slider-2-slide-2-layer-22;||o:mouseenter;a:gotoframe;layer:slider-2-slide-2-layer-34;f:frame_1;ch:true;||o:mouseleave;a:gotoframe;layer:slider-2-slide-2-layer-34;f:frame_2;ch:true;"
+              data-onslides="s:1;"
+              data-frame_0="y:-100%;"
+              data-frame_0_mask="u:t;"
+              data-frame_1="sp:1000;"
+              data-frame_1_mask="u:t;"
+              data-frame_999="y:-100%;o:0;st:w;sp:1200;"
+              data-frame_999_mask="u:t;"
+              data-frame_hover="c:#fff;"
+              style="z-index: 10; font-family: 'Manrope'; cursor: pointer"
+              >Bathroom </rs-layer
+            ><!--
+
+								--><rs-layer
+              id="slider-2-slide-2-layer-34"
+              class="rs-noevents rs-layer-static rs-mtrap"
+              data-type="image"
+              data-rsp_ch="on"
+              data-xy="y:m;"
+              data-pos="a"
+              data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+              data-dim="w:533px,440px,334px,206px;h:300px,247px,187px,115px;"
+              data-vbility="t,t,f,f"
+              data-onslides="s:1;"
+              data-ford="frame_0;frame_1;frame_2;frame_999;"
+              data-frame_0="sX:0;sY:0;o:1;"
+              data-frame_1="sp:400;bri:50%;st:a;"
+              data-frame_999="o:0;st:w;"
+              data-frame_2="sX:0;sY:0;o:1;st:a;sp:400;"
+              data-mousetrap="ola1:slider-2-slide-2-layer-31;f:olayer;d:40ms;mr:;mc:t;ox:;oy:;"
+              style="z-index: 9"
+              ><img
+                src="assets/04.jpg"
+                alt=""
+                class="tp-rs-img"
+                width="533"
+                height="300"
+                data-no-retina
+              /> </rs-layer
+            ><!--
+
+								--><rs-layer
+              id="slider-2-slide-2-layer-33"
+              class="rs-noevents rs-layer-static rs-mtrap"
+              data-type="image"
+              data-rsp_ch="on"
+              data-xy="y:m;"
+              data-pos="a"
+              data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+              data-dim="w:533px,440px,334px,206px;h:300px,247px,187px,115px;"
+              data-vbility="t,t,f,f"
+              data-onslides="s:1;"
+              data-ford="frame_0;frame_1;frame_2;frame_999;"
+              data-frame_0="sX:0;sY:0;o:1;"
+              data-frame_1="sp:400;bri:50%;st:a;"
+              data-frame_999="o:0;st:w;"
+              data-frame_2="sX:0;sY:0;o:1;st:a;sp:400;"
+              data-mousetrap="ola1:slider-2-slide-2-layer-30;f:olayer;d:40ms;mr:;mc:t;ox:;oy:;"
+              style="z-index: 8"
+              ><img
+                src="assets/03.jpg"
+                alt=""
+                class="tp-rs-img"
+                width="533"
+                height="300"
+                data-no-retina
+              /> </rs-layer
+            ><!--
+
+								--><rs-layer
+              id="slider-2-slide-2-layer-32"
+              class="rs-noevents rs-layer-static rs-mtrap"
+              data-type="image"
+              data-rsp_ch="on"
+              data-xy="y:m;"
+              data-pos="a"
+              data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+              data-dim="w:533px,440px,334px,206px;h:300px,247px,187px,115px;"
+              data-vbility="t,t,f,f"
+              data-onslides="s:1;"
+              data-ford="frame_0;frame_1;frame_2;frame_999;"
+              data-frame_0="sX:0;sY:0;o:1;"
+              data-frame_1="sp:400;bri:50%;st:a;"
+              data-frame_999="o:0;st:w;"
+              data-frame_2="sX:0;sY:0;o:1;st:a;sp:400;"
+              data-mousetrap="ola1:slider-2-slide-2-layer-28;f:olayer;d:40ms;mr:;mc:t;ox:;oy:;"
+              style="z-index: 7"
+              ><img
+                src="assets/02.jpg"
+                alt=""
+                class="tp-rs-img"
+                width="533"
+                height="300"
+                data-no-retina
+              /> </rs-layer
+            ><!--
+
+								--><rs-layer
+              id="slider-2-slide-2-layer-27"
+              class="rs-noevents rs-layer-static rs-mtrap"
+              data-type="image"
+              data-rsp_ch="on"
+              data-xy="y:m;"
+              data-pos="a"
+              data-text="w:normal;s:20,16,12,7;l:0,20,15,9;"
+              data-dim="w:533px,440px,334px,206px;h:300px,247px,187px,115px;"
+              data-vbility="t,t,f,f"
+              data-onslides="s:1;"
+              data-ford="frame_0;frame_1;frame_2;frame_999;"
+              data-frame_0="sX:0;sY:0;o:1;"
+              data-frame_1="sp:400;bri:50%;st:a;"
+              data-frame_999="o:0;st:w;"
+              data-frame_2="sX:0;sY:0;o:1;st:a;sp:400;"
+              data-mousetrap="ola1:slider-2-slide-2-layer-29;f:olayer;d:40ms;mr:;mc:t;ox:;oy:;"
+              style="z-index: 6"
+              ><img
+                src="assets/01.jpg"
+                alt=""
+                class="tp-rs-img"
+                width="533"
+                height="300"
+                data-no-retina
+              /> </rs-layer
+            ><!--
+							--></rs-group
+          ><!--
+
+							--><rs-layer
+            id="slider-2-slide-2-layer-15"
+            class="rs-layer-static"
+            data-type="text"
+            data-color="rgba(255, 255, 255, 0.6)"
+            data-xy="xo:50px;y:b;yo:50px;"
+            data-text="w:normal;s:30;l:30;fw:500;"
+            data-vbility="t,f,f,f"
+            data-basealign="slide"
+            data-rsp_o="off"
+            data-rsp_bd="off"
+            data-onslides="s:1;"
+            data-frame_0="y:100%;"
+            data-frame_1="e:power4.inOut;sp:1200;"
+            data-frame_999="o:0;st:w;"
+            style="z-index: 6; font-family: 'Manrope'"
+            >20<br />
+            23 </rs-layer
+          ><!--
+
+							--><a
+            id="slider-2-slide-2-layer-21"
+            class="rs-layer rs-layer-static"
+            href="https://t.me/mentos302"
+            target="_blank"
+            rel="noopener"
+            data-type="text"
+            data-color="rgba(255, 255, 255, 0.65)"
+            data-xy="x:r;xo:50px;y:b;yo:50px;"
+            data-text="w:normal;s:36;l:36;fw:700;"
+            data-basealign="slide"
+            data-rsp_o="off"
+            data-rsp_bd="off"
+            data-onslides="s:1;"
+            data-frame_0="y:bottom;"
+            data-frame_1="sp:1000;"
+            data-frame_999="o:0;st:w;"
+            data-frame_hover="c:#fff;"
+            style="z-index: 5; font-family: 'Manrope'; cursor: pointer"
+            ><i class="fa-instagram"></i> </a
+          ><!--
+					--></rs-static-layers
+        >
+      </rs-module>
+      <script></script>
+      <script>
+        if (typeof revslider_showDoubleJqueryError === "undefined") {
+          function revslider_showDoubleJqueryError(sliderID) {
+            console.log(
+              "You have some jquery.js library include that comes after the Slider Revolution files js inclusion."
+            );
+            console.log("To fix this, you can:");
+            console.log(
+              "1. Set 'Module General Options' -> 'Advanced' -> 'jQuery & OutPut Filters' -> 'Put JS to Body' to on"
+            );
+            console.log("2. Find the double jQuery.js inclusion and remove it");
+            return "Double Included jQuery Library";
+          }
+        }
+      </script>
+    </rs-module-wrap>
+    <!-- END REVOLUTION SLIDER -->
+
+    <script>
+      var tpj = jQuery;
+      if (window.RS_MODULES === undefined) window.RS_MODULES = {};
+      if (RS_MODULES.modules === undefined) RS_MODULES.modules = {};
+      RS_MODULES.modules["revslider21"] = {
+        once:
+          RS_MODULES.modules["revslider21"] !== undefined
+            ? RS_MODULES.modules["revslider21"].once
+            : undefined,
+        init: function () {
+          window.revapi2 =
+            window.revapi2 === undefined ||
+            window.revapi2 === null ||
+            window.revapi2.length === 0
+              ? document.getElementById("rev_slider_2_1")
+              : window.revapi2;
+          if (
+            window.revapi2 === null ||
+            window.revapi2 === undefined ||
+            window.revapi2.length == 0
+          ) {
+            window.revapi2initTry =
+              window.revapi2initTry === undefined
+                ? 0
+                : window.revapi2initTry + 1;
+            if (window.revapi2initTry < 20)
+              requestAnimationFrame(function () {
+                RS_MODULES.modules["revslider21"].init();
+              });
+            return;
+          }
+          window.revapi2 = jQuery(window.revapi2);
+          if (window.revapi2.revolution == undefined) {
+            revslider_showDoubleJqueryError("rev_slider_2_1");
+            return;
+          }
+          revapi2.revolutionInit({
+            revapi: "revapi2",
+            DPR: "dpr",
+            sliderLayout: "fullscreen",
+            visibilityLevels: "1240,1024,778,480",
+            gridwidth: "1240,1024,778,480",
+            gridheight: "900,768,960,720",
+            perspective: 600,
+            perspectiveType: "global",
+            editorheight: "1303,768,960,720",
+            responsiveLevels: "1240,1024,778,480",
+            fullScreenOffsetContainer: "#masthead",
+            stopAtSlide: 1,
+            stopAfterLoops: 0,
+            stopLoop: true,
+            progressBar: { disableProgressBar: true },
+            navigation: {
+              onHoverStop: false,
+            },
+            parallax: {
+              levels: [
+                2, 10, 15, 20, 25, 30, 35, 40, 45, 46, 47, 48, 49, 50, 51, 30,
+              ],
+              type: "mousescroll",
+              origo: "slidercenter",
+              speed: 0,
+            },
+            viewPort: {
+              global: false,
+              globalDist: "-200px",
+              enable: false,
+            },
+            fallbacks: {
+              allowHTML5AutoPlayOnAndroid: true,
+            },
+          });
+
+          if (typeof RSMousetrap !== "undefined") RSMousetrap(revapi2);
+        },
+      }; // End of RevInitScript
+      if (window.RS_MODULES.checkMinimal !== undefined) {
+        window.RS_MODULES.checkMinimal();
+      }
+    </script>
+
+    <script src="js/revolution.addon.mousetrap.min.js"></script>
+  </body>
+</html>
